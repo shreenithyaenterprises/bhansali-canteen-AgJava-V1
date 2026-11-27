@@ -1,0 +1,174 @@
+<div class="row">
+        <!-- left column -->
+        <div class="col-md-8">
+          <!-- general form elements -->
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Shift Master</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form [formGroup]="ShiftForm" id="ShiftForm" (ngSubmit)="Submit()">
+              <div class="box-body">
+                  <div class="row mb-2">
+                    <div class="col-md-4">
+                    <label for="shift_code">Shift Code</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="shift_code"
+                        placeholder="Shift Code"
+                        formControlName="shift_code" />
+                        <span class="text-danger"
+                        *ngIf="(shift_code.touched || submitted) && shift_code.errors?.required">
+                        Shift Code is required
+                    </span>
+                    </div>
+                    <div class="col-md-8">
+                        <label for="incharge">Shift Type</label>
+                        <div class="form-group">
+                            <label>
+                                <input type="radio" id="dy" name="shift_type" class="minimal" value="day" formControlName="shift_type">
+                                    Day
+                            </label>
+                            <label>
+                                <input type="radio" id="ng" name="shift_type" class="minimal" value="night" formControlName="shift_type">
+                                 Night
+                            </label>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="row mb-2">
+                  <div class="col-md-4">
+                    <label for="in_time">In Time</label>
+                    <input type="time" class="form-control"  id="in_time" placeholder="In Time" formControlName="in_time" />
+                    <span class="text-danger"
+                    *ngIf="(in_time.touched || submitted) && in_time.errors?.required">
+                         In Time is required
+                    </span>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="out_time">Out Time</label>
+                        <input  type="time" name="out_time" formControlName="out_time" class="form-control"  placeholder="Out Time" />  
+                        <span class="text-danger"
+                        *ngIf="(out_time.touched || submitted) && out_time.errors?.required">
+                            Out Time is required
+                        </span>
+                    </div>
+                  </div>
+                  <div class="row mb-2">
+                    <div class="col-md-4">
+                            <label for="lunch_in">Lunch In</label>
+                            <input
+                                type="time" 
+                                class="form-control"
+                                id="lunch_in"
+                                placeholder="Lunch In"
+                                formControlName="lunch_in" />
+                    </div>
+                    <div class="col-md-4">
+                        <label for="lunch_out">Lunch Out</label>
+                        <input
+                            type="time" 
+                            class="form-control"
+                            id="lunch_out"
+                            placeholder="Lunch Out"
+                            formControlName="lunch_out" />
+                    </div>
+                  </div>
+                  <div class="row mb-2">
+                         <div class="col-md-4">
+                                <label for="shift_range_from">Shift Range From</label>
+                                <input
+                                    type="time" 
+                                    class="form-control"
+                                    id="shift_range_from"
+                                    placeholder="Shift Range From"
+                                    formControlName="shift_range_from" />
+                         </div>
+                         <div class="col-md-4">
+                                <label for="shift_range_to">Shift Range To</label>
+                                <input
+                                    type="time" 
+                                    class="form-control"
+                                    id="shift_range_to"
+                                    placeholder="Shift Range To"
+                                    formControlName="shift_range_to" />
+                         </div>
+                       </div>
+                       <div class="row mb-2">
+                             <!-- <div class="col-md-4">
+                                 <label for="site">Site</label>
+                                 <input
+                                     type="text"
+                                     class="form-control"
+                                     id="site"
+                                     placeholder="Address 1"
+                                     formControlName="site_code" />
+                             </div> -->
+                           </div>
+ 
+                
+              </div>
+              <!-- /.box-body -->
+    
+              <div class="box-footer">
+                <div class="form-group">
+                    <div class="col-xs-offset-8 col-sm-4">
+                        <button type="submit" class="btn btn-primary btn-md mr-1" [disabled]="!ShiftForm.valid">
+                            <span class="fa fa-save" aria-hidden="true"></span> Save
+                        </button>
+                        <button type="reset" class="btn btn-warning btn-md">
+                            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Reset
+                        </button>
+                    </div>
+                </div>
+               </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Shift List</h3>
+    
+            </div>
+            <div class="box-body" style="height: 395px; width: 100%;  overflow:auto;">
+                <div class="table-responsive table-bordered table-sm table-stripped">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col" class="text-left">Code</th>
+                          <th scope="col" class="text-left">Type</th>
+                          <th scope="col" class="text-center">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <ng-container *ngFor="let data of shiftData; let i = index">
+                          <tr>
+                            <td>{{ data.shift_code }}</td>
+                            <td>{{ data.shift_type }}</td>
+                            <td class="text-center">
+                              <div>
+                                <a href="#/Shift"  class="mr-2"
+                                  (click)="editData(data)">
+                                  <i class="fa fa-edit text-warning"></i>
+                                </a>
+                                <a href="#/Shift" (click)="deleteData(data)">
+                                  <i class="fa fa-trash" aria-hidden="true"></i>
+                                </a>
+                              </div>
+                             
+                            </td>
+                          </tr>
+                        </ng-container>
+                      </tbody>
+                    </table>
+                    <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
+                  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    

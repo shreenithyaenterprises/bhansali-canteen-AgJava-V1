@@ -1,0 +1,289 @@
+<div class="row">
+        <!-- left column -->
+        <div class="col-md-8">
+          <!-- general form elements -->
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Contractor Master</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form [formGroup]="ContractorForm" id="ContractorForm" (ngSubmit)="Submit()">
+              <div class="box-body">
+                  <div class="row mb-2">
+                    <div class="col-md-4">
+                    <label for="contcode">Contractor Code</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="contcode"
+                        placeholder="Contractor Code"
+                        formControlName="cont_code" [ngClass]="{'locked': disable}" />
+                        <span class="text-danger"
+                        *ngIf="(cont_code.touched || submitted) && cont_code.errors?.required">
+                        Contractor Code is required
+                    </span>
+                    </div>
+                    <div class="col-md-8">
+                      <label for="cont_name">Contractor Name</label>
+                      <input
+                          type="text"
+                          class="form-control "
+                          id="cont_name"
+                          placeholder="Contractor Name"
+                          formControlName="cont_name" />
+                          <span class="text-danger"
+                              *ngIf="(cont_name.touched || submitted) && cont_name.errors?.required">
+                              Contractor Name is required
+                          </span>
+                    </div>
+                  </div>
+                  <div class="row mb-2">
+                  <div class="col-md-4">
+                    <label for="incharge">InCharge</label>
+                    <input type="text" class="form-control"  id="cont_name" placeholder="Contractor Name" formControlName="incharge" />
+                    <span class="text-danger"
+                    *ngIf="(incharge.touched || submitted) && incharge.errors?.required">
+                         Incharege is required
+                    </span>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="mobile">Mobile</label>
+                        <input name="mobile" formControlName="mobile" class="form-control"  placeholder="Mobile No" />  
+                        <span class="text-danger"
+                        *ngIf="(mobile.touched || submitted) && mobile.errors?.required">
+                            Mobile No is required
+                        </span>
+                    </div>
+                    <div class="col-md-4">
+                            <label for="telephone">Telephone</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="telephone"
+                                placeholder="Telephone"
+                                formControlName="telephone" />
+                    </div>
+                  </div>
+                  <div class="row mb-2">
+
+                    <div class="col-md-4">
+                        <label for="state">Email Id</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="emailid"
+                            placeholder="Email Id"
+                            formControlName="email_id" />
+                    </div>
+                    <div class="col-md-4">
+                            <label for="country">Country</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="country"
+                                placeholder="Country"
+                                formControlName="country" />
+                    </div>
+                    <div class="col-md-4">
+                            <label for="state">State</label>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="state"
+                                placeholder="State"
+                                formControlName="state" />
+                    </div>
+                  </div>
+                  <div class="row mb-2">
+                         <div class="col-md-4">
+                                <label for="state">City</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="city"
+                                    placeholder="City"
+                                    formControlName="city" />
+                         </div>
+                         <div class="col-md-4">
+                                <label for="pin_code">Pin Code</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="pin_code"
+                                    placeholder="Pin Code"
+                                    formControlName="pin_code" />
+                         </div>
+                       </div>
+                       <div class="row mb-2">
+                             <div class="col-md-4">
+                                 <label for="state">Address 1</label>
+                                 <input
+                                     type="text"
+                                     class="form-control"
+                                     id="add1"
+                                     placeholder="Address 1"
+                                     formControlName="add1" />
+                             </div>
+                             <div class="col-md-4">
+                                    <label for="state">Address 2</label>
+                                    <input
+                                        type="text"
+                                        class="form-control"
+                                        id="add2"
+                                        placeholder="Address 2"
+                                        formControlName="add2" />
+                             </div>
+                           </div>
+                  <!-- <div class="panel panel-default">
+                    <div class="panel-heading">Employee Clasification</div>
+                    <div class="panel-body">
+                        <div class="row mb-2">
+                            <div class="col-md-4">
+                                <label for="site">Site</label>
+                                <select formControlName="site"  name="site" id="site" class="form-control">
+                                    <option value="" selected>---SELECT---</option>
+                                    <option [value]="item.site_code" *ngFor="let item of siteList">
+                                        {{ item.site_name }}</option>
+                                </select>
+                              </div>
+                            <div class="col-md-4">
+                              <label for="establishment">Establishment</label>
+                              <select formControlName="establishment"  name="establishment" id="establishment" class="form-control">
+                                <option value="" selected>---SELECT---</option>
+                                <option [value]="item.code" *ngFor="let item of establishmentList">
+                                    {{ item.establishment }}</option>
+                             </select>
+                              </div>
+                              <div class="col-md-4">
+                              <label for="division">Division</label>
+                              <select formControlName="division"  name="division" id="division" class="form-control">
+                                <option value="" selected>---SELECT---</option>
+                                <option [value]="item.division_code" *ngFor="let item of divisionList">
+                                    {{ item.division_name }}</option>
+                              </select>
+                              </div>
+                          </div>
+                          <div class="row mb-2">
+                              <div class="col-md-4">
+                                <label for="department">Department</label>
+                                <select formControlName="department"  name="department" id="department" class="form-control">
+                                    <option value="" selected>---SELECT---</option>
+                                    <option [value]="item.dept_code" *ngFor="let item of departmentList">
+                                        {{ item.dept_name }}</option>
+                                  </select>
+                              </div>
+                              <div class="col-md-4">
+                                <label for="category">Category</label>
+                                <select formControlName="category"  name="category" id="category" class="form-control">
+                                    <option value="" selected>---SELECT---</option>
+                                    <option [value]="item.category_code" *ngFor="let item of categoryList">
+                                        {{ item.category_name }}</option>
+                                </select>
+                              </div>
+                              <div class="col-md-4">
+                                <label for="designation">Designation</label>
+                                <select formControlName="designation"  name="designation" id="designation" class="form-control">
+                                    <option value="" selected>---SELECT---</option>
+                                    <option [value]="item.designation_code" *ngFor="let item of designationList">
+                                        {{ item.designation_name }}</option>
+                                </select>
+                              </div>
+                          </div>
+                    </div>
+                  </div> -->
+                
+              </div>
+              <!-- /.box-body -->
+    
+              <div class="box-footer">
+                <div class="form-group">
+                    <div class="col-sm-6 pull-right text-right">
+                        <button type="submit" class="btn btn-primary btn-md mr-1" [disabled]="!ContractorForm.valid">
+                            <span class="fa fa-save" aria-hidden="true"></span> Save
+                        </button>
+                        <button type="reset" class="btn btn-warning btn-md mr-1" (click)="Reset()">
+                            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Reset
+                        </button>
+                        <button type="button" class="btn btn-success btn-md" (click)="showDialog()">
+                            <span class="fa fa-file-excel-o" aria-hidden="true"></span> Upload
+                        </button>
+                    </div>
+                </div>
+               </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Contractor List</h3>
+    
+            </div>
+            <div class="box-body" style="height: 395px; width: 100%;  overflow:auto;">
+                <input type="text" id="table-search" (keyup)="applyFilter($event.target.value)" class="form-control input-sm" placeholder="Search...">
+                <div class="table-responsive table-bordered table-sm table-stripped">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col" class="text-left">Code</th>
+                          <th scope="col" class="text-left">Name</th>
+                          <th scope="col" class="text-center">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <ng-container *ngFor="let data of contractorFLTRData; let i = index">
+                          <tr>
+                            <td>{{ data.cont_code }}</td>
+                            <td>{{ data.cont_name }}</td>
+                            <td class="text-center">
+                              <div>
+                                <a class="mr-2 pointer"
+                                  (click)="editData(data)">
+                                  <i class="fa fa-edit text-warning"></i>
+                                </a>
+                                <a class="pointer" (click)="confirmBox(data)">
+                                  <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                                </a>
+                              </div>
+                             
+                            </td>
+                          </tr>
+                        </ng-container>
+                      </tbody>
+                    </table>
+                    <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
+                  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+     <!-----Popup Box-->
+     <p-dialog  [(visible)]="dialogDisplay" (onHide)="cancel()"  width="600" height="300">
+        <p-header>
+            <div class="col-md-6 pull-left float-left">
+                Contractor Master Upload
+            </div>
+        </p-header>
+        <div class="row">
+            <div class="col-md-12">
+              <div class="box box-solid">
+                <div class="box-header with-border">
+                    <div class="col-md-6 pull-right text-right">
+                        <a  href="./assets/template/ContractorMaster.xlsx"  style="cursor: pointer;">Download Template</a>
+                    </div>
+                 </div>
+                <div class="box-body">
+                  <div class="col-md-12">
+                      <input type="file" class="form-control" (change)="incomingfile($event)" placeholder="Upload file" accept=".xlsx">
+                      <button type="button" class="btn btn-info" (click)="Upload()" >Upload</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <p-footer>
+
+        </p-footer>
+    </p-dialog>        

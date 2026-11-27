@@ -1,0 +1,262 @@
+/* Google Fonts Import Link */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+/* You can add global styles to this file, and also import other style files */
+body {
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  
+}
+.pointer {cursor: pointer;}
+.main-header .navbar, .logo  {
+  /* background-color: #3c8dbc; */
+  background-color: black !important;
+}
+.navbar-nav > .user-menu > .dropdown-menu > li.user-header {
+  background-color: black !important;
+}
+.main-footer, .content-wrapper{
+  background-color:#36454F !important;
+  color: grey;
+}
+label {
+  font-weight: 500 !important;
+}
+label > input[type=radio] {
+  vertical-align: middle !important;
+  margin-top: -5px !important;
+}
+.text-orange {
+  color: orange !important;
+}
+.form-group {
+  margin-bottom: 10px;
+}
+.locked{
+  pointer-events: none;
+  background-color: #ccc;
+}
+.input-control {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  font-weight: 500 !important;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  font-size: 11px !important;
+  height: 34px !important;
+  padding: 6px 12px !important;
+  line-height: 1.42857143 !important;
+  color: #555555 !important;
+  background-color: #fff !important;
+  border: 1px solid #ccc !important;
+}
+.input-control:focus {
+  border: 1px solid #555;
+}
+input[type=radio] {
+   margin-right: 5px !important;
+   margin-left: 10px !important;
+}
+.ui-overlap{
+  overflow: visible !important;
+  z-index: 999 !important;
+}
+
+.label-control {
+  font-weight: 500 !important;
+  font-family: 'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+  font-size: 11px !important;
+  color: #333333 !important;
+}
+.dark {
+  color: white;
+  background-color: #000;
+  border-color: #000;
+}
+.dark:hover {
+  border:1px solid;
+  color: #000;
+  background-color: white;
+  border-color: white;
+  box-shadow: 0 0 10px #719ECE;
+}
+.content {
+  padding: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: #36454F !important;
+}
+.mr-1 {
+  margin-right: 5px !important;
+}
+.mb-2{
+  margin-bottom: 10px !important;
+}
+.btn-primary {
+  color: #fff;
+  background-color: #0d6efd;
+  border-color: #0d6efd;
+}
+.btn-warning {
+  color: #000;
+  background-color: #ffc107;
+  border-color: #ffc107;
+}
+.form-control {
+  font-size: 11px !important;
+}
+input.ng-invalid.ng-touched, textarea.ng-invalid.ng-touched{
+  border-color: red !important;
+}
+select.ng-invalid.ng-touched{
+  border-color: red !important;
+}
+.panel {
+  margin-bottom: 5px !important;
+}
+.mrv{
+  margin-left: -30px !important;
+}
+.mrvrgt{
+  margin-top: -30px !important;
+}
+.brlrm{
+  border-left: 0px !important;
+}
+.brrrm{
+  border-right: 0px !important;
+}
+.mt-2{
+  margin-top: 20px !important ;
+}
+.text-divider{margin: 2em 0; line-height: 0; text-align: center;}
+.text-divider span{background-color: #f5f5f5; padding: 1em;}
+.text-divider:before{ content: " "; display: block; border-top: 1px solid #e3e3e3; border-bottom: 1px solid #f7f7f7;}
+
+dp-date-picker.dp-material .dp-picker-input {
+  height: 34px !important;
+  width: 213px !important;
+  text-align: left !important;
+  font-size: 11px !important;
+  padding: 6px 12px;
+}
+@media (min-width: 768px) {
+  .pull-left {
+      float: left !important;
+  }
+  .pull-right {
+      float: right !important;
+  }
+  .pull-none {
+      float: none !important;
+  }
+}
+.pic {
+  height:120px;
+  width:120px;
+}
+.cam {
+  height: 200px !important;
+  width:200px !important;
+}
+.cam-button{
+  position: absolute;
+  z-index: 1;
+  text-align: center !important;
+}
+ img {
+  position: relative;
+} 
+.container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+.container img {
+  width: 100%;
+  height: 100%;
+}
+.picbox{
+  width: 100px !important;
+  height: 100px !important;
+  cursor: pointer;
+}
+.locked{
+  pointer-events: none;
+  background-color: #ccc;
+}
+/**ScrollBar**/
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+/* Style the button and place it in the middle of the container/image */
+.container .btn {
+  position: absolute;
+  top: 100%;
+  left: 60%;
+
+}
+.search-box {
+  padding-right:5px !important;
+  margin-top: 3px !important;
+  float: right !important;
+}
+
+@media print {
+  body * {
+    visibility:hidden;
+  }
+  #print-section, #print-section * {
+    visibility:visible;
+  }
+  #print-section {
+    position:absolute;
+    left:0;
+    top:-50px;
+  }
+}
+table,thead,tbody,tfoot,tr,th,td,p { font-family:"Calibri"; font-size:12px; font-weight: bold;}
+a.comment-indicator:hover + comment { background:#ffd; position:absolute; display:block; border:1px solid black; padding:0.5em;  } 
+a.comment-indicator { background:red; display:inline-block; border:1px solid black; width:0.5em; height:0.5em;  } 
+comment { display:none;  } 
+.editWindow{
+  max-height: 530px !important;
+  overflow: auto;
+}
+.mt-25 {
+  margin-top: 25px;
+}
+.mt-30 {
+  margin-top: 30px;
+}
+.mt-20 {
+  margin-top: 20px;
+}
+.mt-10 {
+  margin-top: 10px;
+}
+.mr-10 {
+  margin-right: 10px;
+}
+
+

@@ -1,0 +1,101 @@
+
+<div class="row">
+    <!-- left column -->
+    <div class="col-md-8">
+      <!-- general form elements -->
+      <div class="box box-info" >
+        <div class="box-header with-border">
+          <h3 class="box-title">User Profile</h3>
+        </div>
+        <div class="box-body">
+            <div class="col-md-6">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                      <label for="userid" class="control-label col-xs-4">User Id</label> 
+                      <div class="col-xs-8">
+                        <input id="userid" name="userid" placeholder="Login ID" type="text" [ngClass]="{'locked': disable}" class="form-control" required="required" [(ngModel)]="user_id">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="username" class="control-label col-xs-4">User Name</label> 
+                      <div class="col-xs-8">
+                        <input id="username" name="username" placeholder="User Name" type="text" class="form-control" [(ngModel)]="user_name">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="password" class="control-label col-xs-4">Password</label> 
+                      <div class="col-xs-8">
+                        <input id="password" name="password" placeholder="Password" type="password" class="form-control" required="required" [(ngModel)]="password">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="conformpassword" class="control-label col-xs-4">Confirm Password</label> 
+                      <div class="col-xs-8">
+                        <input id="confirmpassword" name="conformpassword" placeholder="Confirm Password" type="password" class="form-control" required="required" [(ngModel)]="confirm_password">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label for="role" class="control-label col-xs-4">Role</label> 
+                      <div class="col-xs-8">
+                        <select id="role" name="role" class="select form-control" [(ngModel)]="role">
+                            <option *ngFor="let item of lstRole" [value]="item.value">{{item.label}}</option>
+                        </select>
+                      </div>
+                    </div> 
+                </form>
+            </div>
+        </div>
+         <!-- /.box-body -->
+        <div class="box-footer">
+            <div class="form-group">
+                <div class="col-xs-offset-4 col-xs-8">
+                    <button name="submit" type="submit" class="btn btn-primary" (click)="submit()">Submit</button>
+                    <button name="reset" type="reset" class="btn btn-warning" style="margin-left: 10px;" (click)="reset()">Reset</button>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="box box-info">
+        <div class="box-header with-border">
+          <h3 class="box-title">User List</h3>
+
+        </div>
+        <div class="box-body" style="height: 395px; width: 100%;  overflow:auto;">
+            <div class="table-responsive table-bordered table-sm table-stripped">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="text-left">User Id</th>
+                      <th scope="col" class="text-left">User Name</th>
+                      <th scope="col" class="text-center">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let data of userData; let i = index">
+                      <tr>
+                        <td>{{ data.user_id }}</td>
+                        <td>{{ data.user_name }}</td>
+                        <td class="text-center">
+                          <div>
+                            <a  class="mr-10 pointer"
+                              (click)="editData(data)">
+                              <i class="fa fa-edit text-warning"></i>
+                            </a>
+                            <a  class="pointer" (click)="confirmBox(data)">
+                              <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+                          </div>
+                         
+                        </td>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+                <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
+              </div>
+        </div>
+      </div>
+    </div>
+</div>

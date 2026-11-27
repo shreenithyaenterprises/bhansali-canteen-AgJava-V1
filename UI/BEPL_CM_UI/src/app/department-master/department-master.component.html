@@ -1,0 +1,138 @@
+<div class="row">
+        <!-- left column -->
+        <div class="col-md-8">
+          <!-- general form elements -->
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Department Master</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form [formGroup]="DeptMasterForm" id="deptMaster" (ngSubmit)="Submit()">
+              <div class="box-body">
+                <div class="row mb-2">
+                    <div class="form-group col-md-6">
+                    <label for="deptcode">Department Code</label>
+                    <input
+                        type="text"
+                        class="form-control" [ngClass]="{'locked': disable}" 
+                        id="deptcode"
+                        placeholder="Department Code"
+                        formControlName="dept_code"/>
+                        <span class="text-danger"
+                        *ngIf="(dept_code.touched || submitted) && dept_code.errors?.required">
+                        Department Code is required
+                    </span>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="form-group col-md-6">
+                    <label for="deptName">Department Name</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="deptName"
+                        placeholder="Department Name"
+                        formControlName="dept_name" />
+                        <span class="text-danger"
+                        *ngIf="(dept_name.touched || submitted) && dept_name.errors?.required">
+                        Department Name is required
+                    </span>
+                    </div>
+                </div>
+              </div>
+              <!-- /.box-body -->
+    
+              <div class="box-footer">
+                <div class="form-group">
+                    <div class="col-sm-6 pull-right text-right">
+                        <button type="submit" class="btn btn-primary btn-md mr-1" [disabled]="!DeptMasterForm.valid">
+                            <span class="fa fa-save" aria-hidden="true"></span> Save
+                        </button>
+                        <button type="reset" class="btn btn-warning btn-md mr-1" (click)="reset()">
+                            <span class="glyphicon glyphicon-refresh" aria-hidden="true" ></span> Reset
+                        </button>
+                        <button type="button" class="btn btn-success btn-md" (click)="showDialog()">
+                            <span class="fa fa-file-excel-o" aria-hidden="true"></span> Upload
+                        </button>
+                    </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Department List</h3>
+    
+            </div>
+            <div class="box-body" style="max-height: 450px; overflow: auto;">
+                <div class="table">
+                    <input type="text" id="table-search" (keyup)="applyFilter($event.target.value)" class="form-control input-sm" placeholder="Search...">
+                    <table class="table table-responsive table-bordered table-sm table-stripped">
+                      <thead>
+                        <tr>
+                          <th scope="col" class="text-left">Dept Code</th>
+                          <th scope="col" class="text-left">Dept Name</th>
+                          <th scope="col" class="text-center">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <ng-container *ngFor="let data of deptFilterData; let i = index">
+                          <tr>
+                            <td>{{ data.dept_code }}</td>
+                            <td>{{ data.dept_name }}</td>
+                            <td class="text-center">
+                              <div>
+                                <a
+                                  class="pointer mr-10"
+                                  (click)="editData(data)">
+                                  <i class="fa fa-edit text-warning"></i>
+                                </a>
+                                <a
+                                  class="pointer"
+                                  (click)="confirmBox(data)">
+                                  <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                                </a>
+                              </div>
+                             
+                            </td>
+                          </tr>
+                        </ng-container>
+                      </tbody>
+                    </table>
+                    <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
+                  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-----Popup Box-->
+    <p-dialog header="" [(visible)]="dialogDisplay" [transitionOptions]="'10ms'" (onHide)="cancel()" [modal]="true"  width="600" height="300">
+        <p-header>
+            <div class="col-md-6 pull-left float-left">
+                Department Master Upload
+            </div>
+        </p-header>
+        <div class="row">
+            <div class="col-md-12">
+              <div class="box box-solid">
+                <div class="box-header with-border">
+                    <div class="col-md-6 pull-right text-right">
+                        <a  href="./assets/template/DepartmentMaster.xlsx"  style="cursor: pointer;">Download Template</a>
+                    </div>
+                 </div>
+                <div class="box-body">
+                  <div class="col-md-12">
+                      <input type="file" class="form-control" (change)="incomingfile($event)" placeholder="Upload file" accept=".xlsx">
+                      <button type="button" class="btn btn-info" (click)="Upload()" >Upload</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <p-footer>
+
+        </p-footer>
+    </p-dialog>     

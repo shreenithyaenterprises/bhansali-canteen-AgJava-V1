@@ -1,0 +1,90 @@
+<div class="row">
+    <!-- left column -->
+    <div class="col-md-12">
+      <!-- general form elements -->
+      <div class="box box-info" >
+        <div class="box-header with-border">
+          <h3 class="box-title">Manager Mapping List</h3>
+          <!-- <div class="col-md-2 pull-right float-right">
+            <a  (click)="exportexcel()" style="cursor: pointer;"><i class="fa fa-file-excel-o text-green search-box" style="font-size:30px;" aria-hidden="true"></i></a>
+          </div> -->
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+          <div class="box-body" style="min-height:400px;">
+            <div class="ui-g-12">
+                <div class="ui-g-6" style="width:250px;margin-bottom:10px">
+                    <div class="ui-g-4">
+                        <p-radioButton name="groupname" label="SH" value="SH" [(ngModel)]="optval" inputId="optSH" (onClick)="onOptClick()"></p-radioButton>
+                    </div>  
+                    <div class="ui-g-4"> 
+                        <p-radioButton name="groupname" label="DH" value="DH" [(ngModel)]="optval" inputId="optDH" (onClick)="onOptClick()"></p-radioButton>
+                    </div>
+                    <div class="ui-g-4">    
+                        <p-radioButton name="groupname" label="FH" value="FH" [(ngModel)]="optval" inputId="optFH" (onClick)="onOptClick()"></p-radioButton>
+                    </div>
+                </div>
+                <div class="ui-g-3">
+                    <span class="ui-float-label">
+                        <input id="float-input" type="text"  pInputText [(ngModel)]="old_mgr" (input)="onSearchChange($event.target.value)"> 
+                        <label for="float-input" class="label-control">Existing {{ optval }}</label>
+                    </span>
+                </div>
+                <div class="ui-g-3">
+                    <span class="ui-float-label">
+                        <input id="float-input" type="text"  pInputText [(ngModel)]="new_mgr"> 
+                        <label for="float-input" class="label-control">New {{ optval }}</label>
+                    </span>
+                </div>
+                <div class="ui-g-3">
+                    <button type="submit" class="btn btn-primary btn-md mr-1" (click)="update()"  >
+                        <span class="fa fa-refresh" aria-hidden="true"></span> Update
+                    </button>
+                </div>
+            </div>
+            <div class="ui-g-12"  style="min-height:380px;">
+                <p-table [columns]="cols"  [value]="lstempFLTR" dataKey="empCode" 
+                [scrollable]="true" scrollHeight="300px" [loading]="loading"  [(selection)]="selectedEmp">
+                   <ng-template pTemplate="header" let-columns >
+                       <tr>
+                            <th style="width: 3em">
+                                <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+                            </th>
+                            <th *ngFor="let col of columns" [pSortableColumn]="col.field" pResizableColumn style="text-align:center;">
+                               {{col.header}}
+                               <p-sortIcon [field]="col.field"></p-sortIcon>
+                            </th>
+                       </tr>
+                   </ng-template>
+                   <ng-template pTemplate="body" let-rowData let-columns="columns" let-expanded="expanded">
+                       <tr [pSelectableRow]="rowData" [pSelectableRowIndex]="rowIndex" >
+                            <td style="width: 3em">
+                                <p-tableCheckbox [value]="rowData"></p-tableCheckbox>
+                            </td>
+                            <td *ngFor="let col of columns"  class="ui-resizable-column">
+                               {{rowData[col.field]}}
+                            </td>
+                       </tr>
+                   </ng-template>
+                   <ng-template pTemplate="emptymessage" let-columns>
+                       <tr>
+                           <td [attr.colspan]="columns.length">
+                               No records found
+                           </td>
+                       </tr>
+                   </ng-template>
+               </p-table> 
+
+           </div>
+          </div>
+          <!-- /.box-body -->
+          <div class="box-footer">
+            <div class="form-group">
+
+            </div>
+          </div>
+     
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,178 @@
+<div class="row">
+    <!-- left column -->
+    <div class="col-md-8">
+      <!-- general form elements -->
+      <div class="box box-info">
+        <div class="box-header with-border">
+          <h3 class="box-title">Device Master</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form [formGroup]="DeviceForm" id="DeviceForm" (ngSubmit)="Submit()">
+          <div class="box-body">
+              <div class="row mb-2">
+                <div class="col-md-4">
+                <label for="ip_address">IP Address</label>
+                <input type="text" class="form-control" id="ip_address" [ngClass]="{'locked': disable}"  placeholder="IP Address" formControlName="ip_address" />
+                    <span class="text-danger"
+                    *ngIf="(ip_address.touched || submitted) && ip_address.errors?.required">
+                    IP Address is required
+                </span>
+                </div>
+                <div class="col-md-4">
+                    <label for="machine_no">Machine No</label>
+                    <div class="form-group">
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="machine_no"
+                            placeholder="Machine No"
+                            formControlName="machine_no" />
+                            <span class="text-danger"
+                            *ngIf="(machine_no.touched || submitted) && machine_no.errors?.required">
+                            Machine No is required
+                        </span>
+                    </div>
+                </div>
+              </div>
+              <div class="row mb-2">
+              <div class="col-md-4">
+                <label for="location">Site</label>
+                <select formControlName="site_code"  name="unit" id="unit" class="form-control">
+                  <option value="" selected>---SELECT---</option>
+                  <option [value]="item.site_code" *ngFor="let item of siteList">
+                      {{ item.site_name }}</option>
+               </select>
+              </div>
+                <div class="col-md-4">
+                    <label for="area_code">Area Code</label>
+                    <input  type="text" name="area_code" formControlName="area_code" class="form-control"  placeholder="Area Code" />  
+                    <span class="text-danger"
+                    *ngIf="(area_code.touched || submitted) && area_code.errors?.required">
+                        Area Code is required
+                    </span>
+                </div>
+              </div>
+              <div class="row mb-2">
+                <div class="col-md-4">
+                        <label for="area_name">Area Name</label>
+                        <input  type="text" name="area_name" formControlName="area_name" class="form-control"  placeholder="Area Code" />  
+                        <span class="text-danger"  *ngIf="(area_name.touched || submitted) && area_name.errors?.required">
+                            Area Name is required
+                        </span>
+                </div>
+                 <div class="col-md-4">
+                    <label for="lunch_out">Used For Ice Cream</label>
+                    <div class="form-group">
+                        <label>
+                            <input type="radio" id="dy" name="used_for_ic" class="minimal" value="1" formControlName="used_for_ic">
+                                Yes
+                        </label>
+                        <label>
+                            <input type="radio" id="ng" name="used_for_ic" class="minimal" value="0" formControlName="used_for_ic">
+                                No
+                        </label>
+                    </div>
+                </div>
+             <!-- </div>
+              <div class="row mb-2">
+                     <div class="col-md-4">
+                     <label for="in_out">In/Out</label>
+                    <select formControlName="in_out"  name="in_out" id="in_out" class="form-control">
+                        <option [value]="item.code" *ngFor="let item of IOlist">
+                         {{ item.name }}</option>
+                    </select>
+                     </div>
+                     <div class="col-md-4">
+                        <label for="shift_range_to">Face Reader</label>
+                        <div class="form-group">
+                            <label>
+                                    <input type="radio" id="fr_yes" name="face_reader" class="minimal" value="1" formControlName="face_reader">
+                                        Yes
+                                </label>
+                                <label>
+                                    <input type="radio" id="fr_no" name="face_reader" class="minimal" value="0" formControlName="face_reader">
+                                        No
+                            </label>
+                        </div>
+                     </div>
+                   </div>
+                   <div class="row mb-2">
+                    <div class="col-md-4">
+                        <label for="shift_range_to">RF ID</label>
+                        <div class="form-group">
+                                <label>
+                                <input type="radio" id="rf_yes" name="rf_id" class="minimal" value="1" formControlName="rf_id">
+                                        Yes
+                                </label>
+                                <label>
+                                    <input type="radio" id="rf_no" name="rf_id" class="minimal" value="0" formControlName="rf_id">
+                                        No
+                                </label>
+                        </div>
+                    </div>-->
+                   </div> 
+
+            
+          </div>
+          <!-- /.box-body -->
+
+          <div class="box-footer">
+            <div class="form-group">
+                <div class="col-xs-offset-8 col-sm-4">
+                    <button type="submit" class="btn btn-primary btn-md mr-1" [disabled]="!DeviceForm.valid">
+                        <span class="fa fa-save" aria-hidden="true"></span> Save
+                    </button>
+                    <button type="button" (click)="ResetForm()" class="btn btn-warning btn-md">
+                        <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Reset
+                    </button>
+                </div>
+            </div>
+           </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="box box-info">
+        <div class="box-header with-border">
+          <h3 class="box-title">Device List</h3>
+
+        </div>
+        <div class="box-body" style="height: 395px; width: 100%;  overflow:auto;">
+            <div class="table-responsive table-bordered table-sm table-stripped">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="text-left">IP Address</th>
+                      <th scope="col" class="text-left">Area Name</th>
+                      <th scope="col" class="text-center">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let data of deviceData; let i = index">
+                      <tr>
+                        <td>{{ data.ip_address }}</td>
+                        <td>{{ data.area_name }}</td>
+                        <td class="text-center">
+                          <div>
+                            <a  class="pointer mr-2"
+                              (click)="editData(data)">
+                              <i class="fa fa-edit text-warning"></i>
+                            </a>
+                            <a class="pointer" (click)="confirmBox(data)">
+                              <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+                          </div>
+                         
+                        </td>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+                <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

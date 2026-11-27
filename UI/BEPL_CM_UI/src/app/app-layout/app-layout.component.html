@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>CCM</title>
+    <base href="/" />
+    <meta charset="utf-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script> -->
+    
+  </head>
+  <body class="hold-transition skin-blue fixed sidebar-mini">
+    <div ngxUiLoaderBlurred blur="10">
+        <!-- This page content will be blurred/frosted when foreground loader is showed -->
+        <div class="master-main-container col-sm-12 clearfix no-padding">
+          <div class="wrapper">
+            <header class="main-header">
+              <!-- Logo -->
+              <a href="#" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>CCM</b></span>
+                <!-- logo for regular state and mobile devices -->
+                <!-- <span class="logo-lg"><b>CEAT</b></span> -->
+                <span class="logo-lg">BEPL Canteen</span>
+                <!-- <img src="./assets/dist/img/sne_logo.JPG" class="user-image" alt="User Image" /> -->
+              </a>
+              <!-- Header Navbar: style can be found in header.less -->
+              <nav class="navbar navbar-static-top">
+                <!-- Sidebar toggle button-->
+                <a
+                  href="#"
+                  class="sidebar-toggle"
+                  data-toggle="push-menu"
+                  role="button"
+                >
+                  <span class="sr-only">Toggle navigation</span>
+                </a>
+      
+                <div class="navbar-custom-menu">
+                  <ul class="nav navbar-nav">
+                    <!-- User Account: style can be found in dropdown.less -->
+                    <li class="dropdown user user-menu">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img
+                          src="./assets/dist/img/dummy.jpeg"
+                          class="user-image"
+                          alt="User Image"
+                        />
+                        <span class="hidden-xs">{{ userName }}</span>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <!-- User image -->
+                        <li class="user-header">
+                          <p>
+                            {{ userId }} - {{ userName }}
+                            <small>{{ deptName }}</small>
+                          </p>
+                        </li>
+                        <!-- Menu Body -->
+                        <!-- <li class="user-body">
+                          <div class="row">
+                            <div class="col-xs-4 text-center">
+                              <a href="#">Followers</a>
+                            </div>
+                            <div class="col-xs-4 text-center">
+                              <a href="#">Sales</a>
+                            </div>
+                            <div class="col-xs-4 text-center">
+                              <a href="#">Friends</a>
+                            </div>
+                          </div>
+                         
+                        </li> -->
+                        <!-- Menu Footer-->
+                        <li class="user-footer">
+                          <div class="pull-left">
+                            <!-- <button type="button" class="btn btn-default btn-flat">Profile</button> -->
+                          </div>
+                          <div class="pull-right">
+                            <!-- <a href="#" class="btn btn-default btn-flat">Sign out</a> -->
+                            <button type="button" class="btn btn-default btn-flat" (click)="signOut();">Sign out</button>
+                          </div>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </nav>
+            </header>
+            <!-- Left side column. contains the logo and sidebar -->
+            <aside class="main-sidebar">
+              <!-- sidebar: style can be found in sidebar.less -->
+              <section class="sidebar">
+                <!-- sidebar menu: : style can be found in sidebar.less -->
+                  <!-- Sidebar Holder -->
+                  <div class="user-panel">
+                    <div class="pull-left image">
+                      <img src="./assets/dist/img/LOGO.jpg" width="160" alt="User Image">
+                    </div>
+                    <div class="pull-left info">
+                      <!-- <p>RPG Group</p> -->
+                      <!-- <a href="#"><i class="fa fa-circle text-success"></i> Online</a> -->
+                    </div>
+                  </div>
+               
+                   <ul class="sidebar-menu" data-widget="tree"> 
+                    <li class="header">MAIN NAVIGATION</li>
+                    <!-- <li class="active treeview">
+                      <a href="home.html">
+                        <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                      </a>
+                    </li> -->
+                      <li class="treeview" *ngFor="let item of user_menu">
+                        <a href="#/home"> 
+                            <i class="{{ item.icon }}"></i> <span>{{ item.name}}</span>
+                            <span class="pull-right-container">
+                              <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                          <li class="active" *ngFor="let sbitem of item.submenu">
+                            <a routerLink="/{{ sbitem.routerLink }}"><i class="fa fa-circle-o"></i> {{ sbitem.text }}</a>
+                          </li>
+                        </ul>
+                      </li>
+                   </ul> 
+              </section>
+            </aside>
+            <div class="content-wrapper" style="min-height: 959.667px;">
+              <!-- .content -->
+              <section class="content">
+                <router-outlet> </router-outlet>
+              </section>
+              <!-- /.content -->
+            </div>
+            <footer class="main-footer">
+              <div class="pull-right hidden-xs">
+                
+                <p><small>Powered By </small>Shree Nithya Enterprises</p>
+              </div>
+              <div class="pull-left image" > 
+                  <!-- <img src="./assets/dist/img/sne_logo.JPG"  style="width:35;height:30; margin-top:-20" alt="User Image"> -->
+              </div>
+              <small><a href="#"></a> SNE</small>
+              <!-- All rights reserved. -->
+            </footer>
+          </div>
+        </div>
+    </div>
+  </body>
+</html>
+
+<ngx-ui-loader pbColor="#0d6efd" text="Loading..."></ngx-ui-loader>

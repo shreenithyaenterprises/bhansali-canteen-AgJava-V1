@@ -1,0 +1,61 @@
+
+.title-text {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 16px;
+    font-weight: bolder;
+}
+.bg-black{
+    color: #fff !important
+}
+thead th {
+    font-weight: bold;
+    font-size: 14px !important;
+    color: #fff !important;
+}
+tbody td {
+    color: #fff !important;
+    font-weight: normal;
+}
+table.table-bordered{
+    border:1px solid blue;
+    margin-top:20px;
+  }
+table.table-bordered > thead > tr > th{
+    border:1px solid blue;
+}
+table.table-bordered > tbody > tr > td{
+    border:1px solid blue;
+}
+p-dialog ::ng-deep .bgColorChange {
+    background-color: #000;
+}
+h4 {
+    margin-top: 1px !important; 
+    margin-bottom: 1px !important;
+    font-size: 15px !important;
+    font-weight: bold !important;
+    font-family: "Calibri";
+    color: yellow !important;
+}
+.nav-tabs-custom > .nav-tabs > li.header {
+    color:#fff;
+}
+.carousel-indicators {
+    bottom:-10px;
+  }
+.row {
+    margin-bottom: -15px;
+}
+.content {
+    margin-top: -15px;
+    margin-bottom: -15px;
+}
+.main-footer {
+    padding:-5px !important;
+}
+.nav-tabs-custom > .tab-content {
+background-color: inherit;
+}
+.col-sm-3{
+    width: 20% !important; 
+}

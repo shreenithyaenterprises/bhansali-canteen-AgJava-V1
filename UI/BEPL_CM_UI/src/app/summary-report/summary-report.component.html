@@ -1,0 +1,134 @@
+<div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+          <!-- general form elements -->
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Site Summary Report</h3>
+              <!-- <div class="col-md-2 pull-right float-right">
+                <a  (click)="exportexcel()" style="cursor: pointer;"><i class="fa fa-file-excel-o text-green search-box" style="font-size:20px;" aria-hidden="true"></i></a>
+              </div> -->
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            
+              <div class="box-body">
+                <!-- <form class="form-horizontal" [formGroup]="VisitorReportForm" id ="VisitorReportForm" (ngSubmit)="Submit()"> -->
+                
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="col-xs-3">
+                          <label for="fromdate">From Date</label>
+                          <input type="date" class="form-control" id="from_date" [(ngModel)]="from_date" placeholder="dd-mm-yyyy" >
+                      </div>
+                      <div class="col-xs-3">
+                          <label for="fromdate">To Date</label>
+                          <input type="date" class="form-control" id="to_date" [(ngModel)]="to_date" placeholder="dd-mm-yyyy" >
+                      </div>
+                      <div class="col-xs-3">
+                          <label for="item">Site</label>
+                          <select [(ngModel)]="site"  name="site" id="site"  class="form-control" [ngClass]="{'locked': disable}" (change)="onItemChange($event)">
+                              <option value="-1" selected>ALL</option>
+                              <option [value]="item.site_code" *ngFor="let item of siteList">
+                                  {{ item.site_name }}</option>
+                          </select>
+                      </div>
+                      <div class="form-group mt-20">
+                          <div class="col-sm-2">
+                              <button type="button" class="btn btn-primary btn-md mr-1 " (click)="getReport()" >
+                                <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Refresh
+                            </button>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                <!-- </form> -->
+                
+                  <!-- <div class="col-md-2 pull-right mb-2 mt-10">
+                      <input type="text" id="table-search" (keyup)="applyFilter($event.target.value)" class="form-control input-sm" placeholder="Search...">
+                  </div> -->
+                    <!-- <table class="table table-striped table-responsive table-condensed styled-table" id="visitor-report">
+                        <thead>
+                        <tr>
+                            <th scope="col" class="text-left">#</th>
+                            <th>Emp Code</th>
+                            <th>Name</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Site</th>
+                            <th>Area</th>
+                            <th>Emp Site</th>
+                            <th>Category</th>
+                            <th>Meal</th>
+                            <th>Shift</th>
+                            
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let data of rptFilterData; let i = index">
+                            <td>{{i + 1}}</td>
+                            <td>{{ data.emp_code }}</td>
+                            <td>{{ data.name }}</td>
+                            <td>{{ data.punch_date | date: 'dd-MM-yyyy'}}</td>
+                            <td>{{ data.punch_time }}</td>
+                            <td>{{ data.site_name }}</td>
+                            <td>{{ data.area_description }}</td>
+                            <td>{{ data.emp_site }}</td>
+                            <td>{{ data.emp_type }}</td>
+                            <td>{{ data.meal }}</td>
+                            <td>{{ data.shift_code }}</td>
+                            
+                        </tr>
+                        </tbody>
+                    </table>  -->
+                    
+                    <div class="row">
+                      <div class="col-md-12" style="margin-left: 9px;">
+                        <div class="ui-grid ui-grid-responsive ui-fluid">
+                          <div class="ui-g-12 ui-md-12">
+                              <p-table #dt [columns]="cols"  [value]="rptFilterData" responsiveLayout="scroll" 
+                              [scrollable]="true" scrollHeight="flex" [loading]="loading"  [paginator]="true"  [rows]="10" >
+                                <ng-template pTemplate="caption">
+                                  <div class="ui-helper-clearfix" style="text-align: right">
+                                      <input type="text" pInputText size="50" placeholder="Search..." (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;margin-right: 5px;">
+                                      <button type="button" class="btn btn-success btn-md" (click)="dt.exportCSV()" ><i class="fa fa-lg fa-file-excel-o"></i></button>
+                                  </div>
+                                </ng-template>
+                                <ng-template pTemplate="header" let-columns >
+                                  <tr>
+                                        <th *ngFor="let col of columns" [pSortableColumn]="col.field" [style.width]="col.width" pResizableColumn style="text-align:center;">
+                                        {{col.header}}
+                                        <p-sortIcon [field]="col.field"></p-sortIcon>
+                                        </th>
+                                  </tr>
+                              </ng-template>
+                              <ng-template pTemplate="body" let-rowData let-columns="columns" let-expanded="expanded">
+                                  <tr [pSelectableRow]="rowData" [pSelectableRowIndex]="rowIndex" >
+                                          <td *ngFor="let col of columns"  class="ui-resizable-column" [style.width]="col.width">
+                                              {{ col.data ? (rowData[col.field]| date : col.format) : rowData[col.field] }}
+                                          </td>
+                                  </tr>
+                              </ng-template>
+                              <ng-template pTemplate="emptymessage" let-columns>
+                                  <tr>
+                                      <td [attr.colspan]="columns.length">
+                                          No records found
+                                      </td>
+                                  </tr>
+                              </ng-template>
+                              </p-table> 
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+              </div>
+              <!-- /.box-body -->
+              <!-- <div class="box-footer">
+                <div class="form-group">
+                </div>
+              </div> -->
+            
+          </div>
+        </div>
+      </div>
+      

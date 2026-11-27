@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Signin</title> 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body class="text-center">
+    <div class="cmpylogo">
+      <img src="./assets/dist/img/LOGO.jpg" class="img-fluid" alt="Sample image">
+    </div>
+    <section class="vh-100">
+      <div class="container-fluid h-custom">
+        <div>
+          <!-- <h2 class="align-middle">Head Count Dashboard</h2> -->
+          <!-- <img src="./assets/dist/img/headcount-modified.png" style="height:50px;"
+          class="img-fluid" alt="Sample image"> -->
+        </div>
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-md-9 col-lg-6 col-xl-5">
+            <img src="./assets/dist/img/cutlery.png"
+              class="img-fluid" alt="Sample image">
+          </div>
+          
+            <!-- <img src="../assets/dist/img/AdityaBirla_Logo.jpg" class="img-fluid" alt="Sample image"> -->
+            <!-- <img src="../assets/dist/img/AdityaBirla_Logo.jpg" class="rounded float-end" alt="..."> -->
+          
+          <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+            <form [formGroup]="userForm" id="login" (ngSubmit)="Submit()">
+              <div class="d-flex flex-row align-items-center justify-content-center justify-content-lg-start">
+                <p class="lead fw-normal mb-0 me-3">Sign in</p>
+              </div><link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+              <!-- Email input -->
+              <div class="form-floating mb-4">
+                <input type="text" id="userid" class="form-control form-control-lg" formControlName="userid"
+                  placeholder="Enter a valid Login id" />
+                <label class="form-label" for="userid">Login Id</label>
+              </div>
+    
+              <!-- Password input -->
+              <div class="form-floating mb-3">
+                <input type="password" id="password" class="form-control form-control-lg" formControlName="password"
+                  placeholder="Enter password" />
+                <label class="form-label" for="password">Password</label>
+              </div>
+    
+              <div class="d-flex justify-content-between align-items-center">
+                <a style="cursor: pointer;font-size: 12px; color:#bb2124;" class="text-body" (click)="showDialog()">Forgot password?</a>
+              </div>
+              <div class="text-center text-lg-start mt-4 pt-2">
+                <button type="submit" class="btn btn-primary btn-lg" 
+                  style="padding-left: 2.5rem; padding-right: 2.5rem;">Login</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div
+        class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-white fixed-bottom">
+        <!-- Copyright -->
+        <div class="text-black mb-3 mb-md-0">
+          Designed & Developed By: Shree Nithya Enterprises, Nagpur
+        </div>
+        <!-- Copyright -->
+    
+        <!-- Right -->
+        <div>
+          <p class="lead fw-normal mb-0 me-3">Nagpur Maharashtra</p>
+        </div>
+        <!-- Right -->
+      </div>
+
+      <p-dialog header=""  [(visible)]="dialogDisplay" [transitionOptions]="'10ms'" [modal]="true"  width="400" height="300">
+          <p-header>
+              Forgot password ?
+          </p-header>
+          <div class="container-fluid">
+              <p class="lead fw-normal mb-0 me-3">Enter your login Id and we'll send you an email with system generated password.</p>
+              <div class="form-floating mb-4">
+                  <input type="text" id="loginid" class="form-control" [(ngModel)]="login_id"
+                    placeholder="Enter a valid Login id" />
+                  <label class="form-label" for="userid">Login Id</label>
+              </div>
+          </div>
+          <p-footer>
+              <div class="text-center text-lg-start mt-4 pt-2">
+                  <button type="button" class="btn btn-primary btn-lg" (click)="forgotPassword()"
+                    style="padding-left: 2.5rem; padding-right: 2.5rem;">Submit</button>
+                </div>
+          </p-footer>
+      </p-dialog>
+
+    </section>
+  </body>
+</html>

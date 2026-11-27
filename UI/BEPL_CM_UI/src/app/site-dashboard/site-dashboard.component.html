@@ -1,0 +1,251 @@
+    <!-- Main content -->
+    <section class="content">
+        <!-- /.row (main row) -->
+        <div class="row">
+            <div class="box box-solid bg-black">
+              <div class="box-header">
+                <i class="fa fa-fw fa-cutlery"></i>
+                <h3 class="box-title">Todays Meal Consumption</h3>
+                <div class="col-md-2 pull-right float-right hidden">
+                  <input type="date" name="dtpicker" [(ngModel)]="dtpicker" (change)="dateChange($event)" class="form-control dark input-xs" /> 
+                </div>
+              </div>
+              <div class="box-body">
+                <div class="chart" style="position: relative; height: 150px; overflow:auto;">
+                  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                      <!-- Indicators -->
+                      <ol class="carousel-indicators">
+                        <li *ngFor="let site of SiteData; let i = index"
+                            data-target="#myCarousel" [attr.data-slide-to]="i" [class.active]="i === 0">
+                        </li>
+                      </ol>
+                    
+                      <!-- Wrapper for slides -->
+                      <div class="carousel-inner">
+                        <ng-container *ngFor="let data of SiteData; let i = index; first as isFirst">
+                        <div [ngClass]="isFirst ? 'item active' : 'item' ">
+                          <!-- CEAT Employees Data -->
+                          <div class="col-sm-3 col-xs-3">
+                            <!-- small box -->
+                            <div class="small-box bg-aqua">
+                              <!-- <div class="pull-right text-center"><h4>{{ data.site_name }}</h4></div> -->
+                              <div class="inner">
+                                <h3>{{ data.BF || 0}}</h3>
+                                <p>Break Fast</p>
+                              </div>
+                              <div class="icon">
+                                <!-- <i name="fast-food-outline"></i> -->
+                              </div>
+                              <a [routerLink]="" class="small-box-footer" (click)="DetailView('BF',data)">More info <i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                          </div>
+                          <!-- ./col -->
+                          <div class="col-sm-3 col-xs-3">
+                            <!-- small box -->
+                            <div class="small-box bg-yellow">
+                              <div class="inner">
+                                <h3>{{ data.LN || 0}}<sup style="font-size: 20px"></sup></h3>
+                                <p>Lunch</p>
+                              </div>
+                              <div class="icon">
+                                <!-- <i class="fa fa-coffee" aria-hidden="true"></i> -->
+                              </div>
+                              <a [routerLink]="" class="small-box-footer" (click)="DetailView('LN',data)">More info <i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                          </div>
+                          <!-- ./col -->
+                          <div class="col-sm-3 col-xs-3" *ngIf="data.SN">
+                            <!-- small box -->
+                            <div class="small-box bg-purple">
+                              <div class="inner">
+                                <h3>{{ data.SN || 0}}</h3>
+                  
+                                <p>Snacks</p>
+                              </div>
+                              <div class="icon">
+                                <!-- <i class="ion ion-person-add"></i> -->
+                              </div>
+                              <a [routerLink]="" (click)="DetailView('SN',data)" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                          </div>
+                          <!-- ./col -->
+                          <div class="col-sm-3 col-xs-3">
+                            <!-- small box -->
+                            <div class="small-box bg-navy">
+                              <div class="inner">
+                                <h3>{{ data.DN || 0  }}</h3>
+                                <p>Dinner</p>
+                              </div>
+                              <div class="icon">
+                                <!-- <i class="ion ion-pie-graph"></i> -->
+                              </div>
+                              <a [routerLink]="" (click)="DetailView('DN',data)" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                          </div>
+                          <!-- ./col -->
+                          <div class="col-sm-3 col-xs-3" *ngIf="data.MNS">
+                            <!-- small box -->
+                            <div class="small-box bg-Maroon">
+                              <div class="inner">
+                                <h3>{{ data.MNS || 0  }}</h3>
+                                <p>Midnight Snacks</p>
+                              </div>
+                              <div class="icon">
+                                <!-- <i class="ion ion-pie-graph"></i> -->
+                              </div>
+                              <a  (click)="DetailView('IC',data)" class="small-box-footer pointer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                          </div>
+                          <!-- ./col -->
+                          <div class="col-sm-3 col-xs-3" *ngIf="data.IC">
+                            <!-- small box -->
+                            <div class="small-box bg-Maroon">
+                              <div class="inner">
+                                <h3>{{ data.IC || 0  }}</h3>
+                                <p>Ice Cream</p>
+                              </div>
+                              <div class="icon">
+                                <!-- <i class="ion ion-pie-graph"></i> -->
+                              </div>
+                              <a  (click)="DetailView('IC',data)" class="small-box-footer pointer">More info <i class="fa fa-arrow-circle-right"></i></a>
+                            </div>
+                          </div>
+                        </div>
+                    </ng-container>
+  
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="box box-solid  bg-black">
+              <div class="box-header">
+                <i class="fa fa-fw fa-bar-chart"></i>
+                <h3 class="box-title">Overview</h3>
+              </div>
+              <div class="box-body">
+                 <!-- Chart Data -->
+                <div class="col-md-6">
+                  <h4 class="piechartheader">Daily Meals Summary</h4>
+                  <google-chart *ngIf="summaryData" [type]="type" [options]="options" [data]="summaryData">
+                  </google-chart>
+                </div>
+                <!-- Tabular Data -->
+                <div class="col-md-6">
+                    <div  style="height: 270px; width: 100%;  overflow:auto;">
+                      <h4 class="piechartheader">Monthly Meals Summary</h4>
+                       <div class="table-responsive table-sm table-stripped">
+                         <table class="table">
+                           <thead>
+                             <tr>
+                               <th scope="col" class="text-left">Consumer</th>
+                               <th scope="col" class="text-left">Break Fast</th>
+                               <th scope="col" class="text-left">Lunch</th>
+                               <th scope="col" class="text-left">Snacks</th>
+                               <th scope="col" class="text-left">Dinner</th>
+                               <th scope="col" class="text-left">Midnight Snacks</th>
+                               <th scope="col" class="text-left">Ice Cream</th>
+                               <th scope="col" class="text-left">UKN</th>
+                               <th scope="col" class="text-left">View</th>
+                             </tr>
+                           </thead>
+                           <tbody>
+                             <ng-container *ngFor="let data of summaryDataMonthly; let i = index">
+                               <tr>
+                                 <td>{{ data.category }}</td>
+                                 <td>{{ data.BF }}</td>
+                                 <td>{{ data.LN }}</td>
+                                 <td>{{ data.SN }}</td>
+                                 <td>{{ data.DN }}</td>
+                                 <td>{{ data.MNS }}</td>
+                                 <td>{{ data.IC }}</td>
+                                 <td>{{ data.UKN }}</td>
+                                 <td class="text-center">
+                                   <div>
+                                     <a class="pointer" (click)="DetailViewMonthly(data)"><i class="fa fa-eye text-orange"></i></a>
+                                   </div>
+                                 </td>
+                               </tr>
+                             </ng-container>
+                           </tbody>
+                         </table>
+  
+                     </div>
+                 </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </section>
+      <!-- /.content -->
+      <!-----Popup Box-->
+      <p-dialog styleClass="bg-black" [(visible)]="dialogDisplay" width="700" height="400">
+        <p-header>
+            <div class="col-md-3 pull-left float-left">
+                Detail View<a  (click)="exportexcel()" style="cursor: pointer;"><i class="fa fa-file-excel-o text-green search-box" style="font-size:16px;" aria-hidden="true"></i></a>
+            </div>
+        </p-header>
+        <div class="row">
+          <div class="col-md-8">
+            <div class="form-group" [hidden]="!optFLTR">
+                <label>
+                <input type="radio" id="emp" name="r1" class="minimal" value="EMP"  (change)="onChange($event.target.value)" [(ngModel)]="optbtn">
+                    Employee
+                </label>
+                <label>
+                <input type="radio" id="oemp" name="r1" class="minimal" value="OEMP"  (change)="onChange($event.target.value)" [(ngModel)]="optbtn">
+                    Other Employee
+                </label>
+                <label>
+                    <input type="radio" id="vdr" name="r1" class="minimal" value="VDR"  (change)="onChange($event.target.value)" [(ngModel)]="optbtn">
+                    Vendor
+                </label>
+                <label>
+                  <input type="radio" id="vis" name="r1" class="minimal" value="VIS"  (change)="onChange($event.target.value)" [(ngModel)]="optbtn">
+                  Visitor
+              </label>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <h5 class="text-black">Total : {{dtlFLTRData ? dtlFLTRData.length : ''}}</h5>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="table-responsive table-sm table-stripped bg-black" style="height: 380px; overflow: auto">
+                <input type="text" id="table-searchIO" (keyup)="applyFilterIO($event.target.value)" class="form-control input-sm" placeholder="Search...">
+                <table class="table" id="punches-report">
+                    <thead>
+                        <tr>
+                        <th scope="col" class="text-left">#</th>
+                        <th scope="col" class="text-left">Emp Code</th>
+                        <th scope="col" class="text-left">Name</th>
+                        <th scope="col" class="text-left">Date</th>
+                        <th scope="col" class="text-left">Time</th>
+                        <th scope="col" class="text-left">Meal</th>
+                        <th scope="col" class="text-left">Type</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container *ngFor="let data of dtlFLTRData; let i = index">
+                        <tr>
+                            <td>{{i + 1}}</td>
+                            <td>{{ data.emp_code }}</td>
+                            <td>{{ data.name }}</td>
+                            <td>{{ data.punch_date }}</td>
+                            <td>{{ data.punch_time }}</td>
+                            <td>{{ data.meal }}</td>
+                            <td>{{ data.emp_type }}</td>
+                        </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </div>
+         </div>
+        </div>
+        <!-- <ng-template pTemplate="footer"> 
+            <h4>Total : {{dtlFLTRData ? dtlFLTRData.length : ''}}</h4>
+        </ng-template> -->
+      </p-dialog>

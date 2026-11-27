@@ -1,0 +1,107 @@
+<div class="row">
+        <!-- left column -->
+        <div class="col-md-8">
+          <!-- general form elements -->
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Category Master</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form [formGroup]="CategoryMasterForm" id="catMaster" (ngSubmit)="Submit()">
+              <div class="box-body">
+                <div class="row mb-2">
+                    <div class="form-group col-md-6">
+                    <label for="catcode">Category Code</label>
+                    <input
+                        type="text"
+                        class="form-control" [ngClass]="{'locked': disable}" 
+                        id="catcode"
+                        placeholder="Category Code"
+                        formControlName="category_code"/>
+                        <span class="text-danger"
+                        *ngIf="(category_code.touched || submitted) && category_code.errors?.required">
+                        Category Code is required
+                    </span>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="form-group col-md-6">
+                    <label for="catName">Category Name</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="catName"
+                        placeholder="Category Name"
+                        formControlName="category_name" />
+                        <span class="text-danger"
+                        *ngIf="(category_name.touched || submitted) && category_name.errors?.required">
+                        Category Name is required
+                    </span>
+                    </div>
+                </div>
+              </div>
+              <!-- /.box-body -->
+    
+              <div class="box-footer">
+                <div class="form-group">
+                    <div class="col-xs-offset-8 col-sm-4">
+                        <button type="submit" class="btn btn-primary btn-md mr-1" [disabled]="!CategoryMasterForm.valid">
+                            <span class="fa fa-save" aria-hidden="true"></span> Save
+                        </button>
+                        <button type="reset" class="btn btn-warning btn-md" (click)="reset()">
+                            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Reset
+                        </button>
+                    </div>
+                </div>
+    
+    
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Category List</h3>
+    
+            </div>
+            <div class="box-body">
+                <div class="table">
+                    <table class="table table-responsive table-bordered table-sm table-stripped">
+                      <thead>
+                        <tr>
+                          <th scope="col" class="text-left">Category Code</th>
+                          <th scope="col" class="text-left">Category Name</th>
+                          <th scope="col" class="text-center">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <ng-container *ngFor="let data of categoryData; let i = index">
+                          <tr>
+                            <td>{{ data.category_code }}</td>
+                            <td>{{ data.category_name }}</td>
+                            <td class="text-center">
+                              <div>
+                                <a
+                                  class="pointer mr-10"
+                                  (click)="editData(data)">
+                                  <i class="fa fa-edit text-warning"></i>
+                              </a>
+                                <a class="pointer" (click)="confirmBox(data)">
+                                  <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                                </a>
+                              </div>
+                             
+                            </td>
+                          </tr>
+                        </ng-container>
+                      </tbody>
+                    </table>
+                    <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
+                  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      

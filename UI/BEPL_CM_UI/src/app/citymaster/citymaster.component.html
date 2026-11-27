@@ -1,0 +1,70 @@
+<div class="row">
+  <!-- left column -->
+  <div class="col-md-8">
+    <!-- general form elements -->
+    <div class="box box-info">
+      <div class="box-header with-border">
+        <h3 class="box-title">City Master</h3>
+      </div>
+      <!-- /.box-header -->
+      <!-- form start -->
+      <form [formGroup]="CityMasterForm" id="cityMaster" (ngSubmit)="Submit()">
+        <div class="box-body">
+          <div class="form-group">
+            <label for="cityCode">City Code</label>
+            <input
+              type="text"
+              class="form-control"
+              id="cityCode"
+              placeholder="City Code"
+              formControlName="city_code"
+            />
+          </div>
+          <div class="form-group">
+            <label for="cityName">City Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="cityName"
+              placeholder="City Name"
+              formControlName="city_name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="stateCode">State Code</label>
+            <input
+              type="text"
+              class="form-control"
+              id="cityCode"
+              placeholder="State Code"
+              formControlName="state_code"
+            />
+          </div>
+          <div class="form-group">
+            <label for="stateName">State Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="stateName"
+              placeholder="State Name"
+              formControlName="state_name"
+            />
+          </div>
+        </div>
+        <!-- /.box-body -->
+
+        <div class="box-footer">
+          <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="box box-info">
+      <div class="box-header with-border">
+        <h3 class="box-title">City List</h3>
+      </div>
+      <div class="box-body"></div>
+    </div>
+  </div>
+</div>

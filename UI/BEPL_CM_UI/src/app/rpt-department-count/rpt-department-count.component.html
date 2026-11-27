@@ -1,0 +1,95 @@
+<div class="row">
+    <!-- left column -->
+    <div class="col-md-12">
+      <!-- general form elements -->
+      <div class="box box-info">
+        <div class="box-header with-border">
+          <h3 class="box-title">Department Wise Count</h3>
+          <div class="col-md-2 pull-right float-right">
+            <a  (click)="exportexcel()" style="cursor: pointer;"><i class="fa fa-file-excel-o text-green search-box" style="font-size:20px;" aria-hidden="true"></i></a>
+          </div>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        
+          <div class="box-body">
+            <div class="row">
+                <div class="col-xs-3">
+                    <label for="fromdate">From Date</label>
+                    <input type="date" class="form-control" id="from_date" [(ngModel)]="from_date" placeholder="dd-mm-yyyy" >
+                </div>
+                <div class="col-xs-3">
+                    <label for="fromdate">To Date</label>
+                    <input type="date" class="form-control" id="to_date" [(ngModel)]="to_date" placeholder="dd-mm-yyyy" >
+                </div>
+                <div class="col-xs-3">
+                    <label for="fromdate">Department</label>
+                    <select [(ngModel)]="dept"  name="department" id="department" class="form-control" (change)="onDeptChange($event)">
+                        <option value="-1" selected>---SELECT---</option>
+                        <option [value]="item.dept_code" *ngFor="let item of departmentList">
+                            {{ item.dept_name }}</option>
+                    </select>
+                </div>
+                <div class="form-group mt-20">
+                    <div class="col-sm-2">
+                        <button type="button" class="btn btn-primary btn-md mr-1 " (click)="getReport()" >
+                          <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Refresh
+                       </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="responsive"  style="overflow: auto; max-height: 350px;">
+              <div class="col-md-2 pull-right mb-2 mt-10">
+                  <input type="text" id="table-search" (keyup)="applyFilter($event.target.value)" class="form-control input-sm" placeholder="Search...">
+              </div>
+              
+                <table class="table table-striped table-responsive table-condensed styled-table" id="report">
+                    <thead>
+                    <tr>
+                        <th colspan="9">
+                            Department wise Summary  ( Date From : {{ from_date | date: 'dd-MM-yyyy' }} To : {{ to_date | date: 'dd-MM-yyyy'}} )
+                        </th>
+                        <th> Department: {{ deptName }}</th>
+                    </tr>
+                    <tr>
+                        <th scope="col" class="text-left">Sr No</th>
+                        <th>Dept Code</th>
+                        <th>Department</th>
+                        <th>TEA</th>
+                        <th>Lunch</th>
+                        <!-- <th>Snacks</th> -->
+                        <th>Dinner</th>
+                        <!--<th>Midnight Snacks</th>
+                        <th>Tea</th>-->
+                        <th>UK</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let data of rptFilterData; let i = index">
+                        <td class="text-center">{{i + 1}}</td>
+                        <td class="text-center">{{ data.dept_code}}</td>
+                        <td class="text-left">{{ data.department}}</td>
+                        <td class="text-center">{{ data.TEA }}</td>
+                        <td class="text-center">{{ data.lunch }}</td>
+                        <!-- <td class="text-center">{{ data.snacks }}</td> -->
+                        <td class="text-center">{{ data.dinner }}</td>
+                        <!--<td class="text-center">{{ data.mns }}</td>
+                        <td class="text-center">{{ data.tea }}</td>-->
+                        <td class="text-center">{{ data.uc }}</td>
+                    </tr>
+                    </tbody>
+                </table> 
+              
+            </div>
+          </div>
+          <!-- /.box-body -->
+          <div class="box-footer">
+            <div class="form-group">
+            </div>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+  

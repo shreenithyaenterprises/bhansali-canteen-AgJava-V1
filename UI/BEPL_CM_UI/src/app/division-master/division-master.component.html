@@ -1,0 +1,109 @@
+<div class="row">
+        <!-- left column -->
+        <div class="col-md-8">
+          <!-- general form elements -->
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Division Master</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form [formGroup]="DivisionMasterForm" id="divisionMaster" (ngSubmit)="Submit()">
+              <div class="box-body">
+                <div class="row mb-2">
+                    <div class="form-group col-md-6">
+                    <label for="divisionCode">Division Code</label>
+                    <input
+                        type="text"
+                        class="form-control" [ngClass]="{'locked': disable}" 
+                        id="divisionCode"
+                        placeholder="Division Code"
+                        formControlName="division_code"/>
+                        <span class="text-danger"
+                        *ngIf="(division_code.touched || submitted) && division_code.errors?.required">
+                        Division Code is required
+                    </span>
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="form-group col-md-6">
+                    <label for="divisionName">Division Name</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="divisionName"
+                        placeholder="Division Name"
+                        formControlName="division_name" />
+                        <span class="text-danger"
+                        *ngIf="(division_name.touched || submitted) && division_name.errors?.required">
+                        Division Name is required
+                    </span>
+                    </div>
+                </div>
+              </div>
+              <!-- /.box-body -->
+    
+              <div class="box-footer">
+                <div class="form-group">
+                    <div class="col-xs-offset-8 col-sm-4">
+                        <button type="submit" class="btn btn-primary btn-md mr-1" [disabled]="!DivisionMasterForm.valid">
+                            <span class="fa fa-save" aria-hidden="true"></span> Save
+                        </button>
+                        <button type="reset" class="btn btn-warning btn-md">
+                            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Reset
+                        </button>
+                    </div>
+                </div>
+    
+    
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="box box-info">
+            <div class="box-header with-border">
+              <h3 class="box-title">Division List</h3>
+    
+            </div>
+            <div class="box-body">
+                <div class="table">
+                    <table class="table table-responsive table-bordered table-sm table-stripped">
+                      <thead>
+                        <tr>
+                          <th scope="col" class="text-left">Division Code</th>
+                          <th scope="col" class="text-left">Division Name</th>
+                          <th scope="col" class="text-center">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <ng-container *ngFor="let data of divisionData; let i = index">
+                          <tr>
+                            <td>{{ data.division_code }}</td>
+                            <td>{{ data.division_name }}</td>
+                            <td class="text-center">
+                              <div>
+                                <a
+                                  class="pointer mr-10"
+                                  (click)="editData(data)">
+                                  <i class="fa fa-edit text-warning"></i>
+                                </a>
+                                <a
+                                  class="pointer"
+                                 (click)="confirmBox(data)">
+                                  <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                                </a>
+                              </div>
+                             
+                            </td>
+                          </tr>
+                        </ng-container>
+                      </tbody>
+                    </table>
+                    <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
+                  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      

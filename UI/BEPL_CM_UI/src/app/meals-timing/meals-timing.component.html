@@ -1,0 +1,178 @@
+<div class="row">
+    <!-- left column -->
+    <div class="col-md-8">
+      <!-- general form elements -->
+      <div class="box box-info">
+        <div class="box-header with-border">
+          <h3 class="box-title">Meals Timing</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form [formGroup]="MealForm" id="MealForm" (ngSubmit)="Submit()">
+          <div class="box-body">
+              <div class="row mb-2">
+                <div class="col-md-4">
+                <label for="mealCode">Meal</label>
+                <select formControlName="mealCode"  name="mealCode" id="mealCode" class="form-control" (change)="mealChange($event)">
+                  <option value="" selected>---SELECT---</option>
+                  <option [value]="item.meal_code" *ngFor="let item of mealList">
+                      {{ item.meal_name }}</option>
+                </select>
+
+                <!-- <input
+                    type="text"
+                    class="form-control"
+                    id="meal_code"
+                    placeholder="Meal Code"
+                    formControlName="mealCode"  [ngClass]="{'locked': disable}" /> -->
+                    <span class="text-danger"
+                    *ngIf="(mealCode.touched || submitted) && mealCode.errors?.required">
+                    Meal Code is required
+                    </span>
+                </div>
+                <!-- <div class="col-md-4">
+                  <label for="site_code">Category</label>
+                  <select formControlName="category"  name="category" class="form-control">
+                     <option value="" selected>---SELECT---</option>
+                     <option [value]="item.category_code" *ngFor="let item of categoryList">
+                         {{ item.category_name }}</option>
+                  </select>
+                </div> -->
+              </div>
+              <div class="row mb-2">
+                     <div class="col-md-4">
+                            <label for="time_range_from">Time Range From</label>
+                            <input
+                                type="time" 
+                                class="form-control"
+                                id="time_range_from"
+                                placeholder="Time Range From"
+                                formControlName="time_range_from" />
+                     </div>
+                     <div class="col-md-4">
+                            <label for="time_range_to">Time Range To</label>
+                            <input
+                                type="time" 
+                                class="form-control"
+                                id="time_range_to"
+                                placeholder="Time Range To"
+                                formControlName="time_range_to" />
+                     </div>
+                   </div>
+                   <div class="row mb-2">
+                         <div class="col-md-4">
+                             <label for="site_code">Site</label>
+                             <select formControlName="siteCode"  name="unit" id="unit" class="form-control">
+                                <option value="" selected>---SELECT---</option>
+                                <option [value]="item.site_code" *ngFor="let item of unitList">
+                                    {{ item.site_name }}</option>
+                             </select>
+                         </div>
+                         <div class="col-md-4">
+                          <label for="shift">Shift</label>
+                          <select formControlName="shiftCode"  name="shift" id="shift" class="form-control">
+                             <option value="" selected>---SELECT---</option>
+                             <option [value]="item.shift_code" *ngFor="let item of shiftList">
+                                 {{ item.shift_code }}</option>
+                          </select>
+                      </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-md-4">
+                              <label for="emp_contribution">Emp Contribution</label>
+                              <input
+                                  type="number" 
+                                  class="form-control"
+                                  id="emp_contribution"
+                                  placeholder="Emp Contribution"
+                                  formControlName="emp_contribution"  (change)="calculateCost()"/>
+                        </div>
+                        <div class="col-md-4">
+                              <label for="cmpy_contribution">Company Contribution</label>
+                              <input
+                                  type="number" 
+                                  class="form-control"
+                                  id="cmpy_contribution"
+                                  placeholder="Company Contribution"
+                                  formControlName="cmpy_contribution"  (change)="calculateCost()"/>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                      <div class="col-md-4">
+                            <label for="cost">Total Cost</label>
+                            <input
+                                type="number" 
+                                class="form-control"
+                                id="cost"
+                                placeholder="Total Cost"
+                                formControlName="cost"  (change)="calculateCost()"/>
+                      </div>
+                  </div>
+          </div>
+          <!-- /.box-body -->
+
+          <div class="box-footer">
+            <div class="form-group">
+                <div class="col-xs-offset-8 col-sm-4">
+                    <button type="submit" class="btn btn-primary btn-md mr-1" [disabled]="!MealForm.valid">
+                        <span class="fa fa-save" aria-hidden="true"></span> Save
+                    </button>
+                    <button type="reset" class="btn btn-warning btn-md" (click)="Reset()">
+                        <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Reset
+                    </button>
+                </div>
+            </div>
+           </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="box box-info">
+        <div class="box-header with-border">
+          <h3 class="box-title">Meals List</h3>
+        </div>
+        <div class="box-body" style="height: 395px; width: 100%;  overflow:auto;">
+          <div class="table">
+            <input type="text" id="table-search" (keyup)="applyFilter($event.target.value)" class="form-control input-sm" placeholder="Search...">
+              <div class="table-responsive table-bordered table-sm table-stripped">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="text-left">Site</th>
+                        <th scope="col" class="text-left">Code</th>
+                        <th scope="col" class="text-left">Meal</th>
+                        <th scope="col" class="text-left">Shift</th>
+                        <th scope="col" class="text-center">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <ng-container *ngFor="let data of mealFLTRData; let i = index">
+                        <tr>
+                          <td>{{ data.siteCode }}</td>
+                          <td>{{ data.mealCode }}</td>
+                          <td>{{ data.mealName }}</td>
+                          <td>{{ data.shiftCode }}</td>
+                          <td class="text-center">
+                            <div>
+                              <a href="#/MealsTiming"  class="mr-2"
+                                (click)="editData(data)">
+                                <i class="fa fa-edit text-warning"></i>
+                              </a>
+                              <a href="#/MealsTiming" (click)="confirmBox(data)">
+                                <i class="fa fa-trash text-danger" aria-hidden="true"></i>
+                              </a>
+                            </div>
+                          
+                          </td>
+                        </tr>
+                      </ng-container>
+                    </tbody>
+                  </table>
+                  <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

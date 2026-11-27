@@ -1,0 +1,259 @@
+<div class="row">
+    <!-- left column -->
+    <div class="col-md-8">
+      <!-- general form elements -->
+      <div class="box box-info">
+        <div class="box-header with-border">
+          <h3 class="box-title">Emergency Controller</h3>
+        </div>
+        <!-- /.box-header -->
+        <!-- form start -->
+        <form [formGroup]="emControllerForm" id="emControllerForm" (ngSubmit)="Submit()">
+          <div class="box-body">
+            <div class="row mb-2">
+                <div class="col-md-4">
+                    <label for="shift">Shift</label>
+                    <select id="shift" name="shift" class="select form-control" formControlName="shift">
+                        <option value="" selected>---SELECT---</option>
+                        <option *ngFor="let item of lstShift" [ngValue]="item.value">{{item.label}}</option>
+                    </select>
+                        <span class="text-danger"
+                        *ngIf="(shift.touched || submitted) && shift.errors?.required">
+                        Shift is required
+                    </span>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-4">
+                        <label for="em_controller">Emergency Controller</label>
+                        <input
+                        type="text"
+                        class="form-control"
+                        id="em_controller"
+                        placeholder="Emergency Controller"
+                        formControlName="em_controller"/>
+                        <span class="text-danger"
+                        *ngIf="(em_controller.touched || submitted) && em_controller.errors?.required">
+                        Emergency Controller is required
+                        </span>
+                </div>
+                <div class="col-md-4">
+                        <label for="em_mobile_no">Mobile No</label>
+                        <input
+                        type="text"
+                        class="form-control"
+                        id="em_mobile_no"
+                        placeholder="Emergency Controller Mobile No"
+                        formControlName="em_mobile_no" pattern="^[56789]\d{9,9}$" />
+                        <span class="text-danger"
+                        *ngIf="(em_mobile_no.touched || submitted) && em_mobile_no.errors?.required">
+                        Emergency Controller Mobile No is required
+                        </span>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-4">
+                    <label for="assembly_point1">Assembly Point 1</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="assembly_point1"
+                        placeholder="Assembly Point 1"
+                        formControlName="assembly_point1"/>
+                        <span class="text-danger"
+                        *ngIf="(assembly_point1.touched || submitted) && assembly_point1.errors?.required">
+                        Assembly Point 1 is required
+                    </span>
+                </div>
+                <div class="col-md-4">
+                    <label for="assembly_point1_mobile">Mobile No</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="assembly_point1_mobile"
+                        placeholder="Mobile No"
+                        formControlName="assembly_point1_mobile" pattern="^[56789]\d{9,9}$" />
+                        <span class="text-danger"
+                        *ngIf="(assembly_point1_mobile.touched || submitted) && assembly_point1_mobile.errors?.required">
+                        Assembly Point 1 Mobile No is required
+                    </span>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-4">
+                    <label for="assembly_point2">Assembly Point 2</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="assembly_point2"
+                        placeholder="Assembly Point 2"
+                        formControlName="assembly_point2"/>
+                        <span class="text-danger"
+                        *ngIf="(assembly_point2.touched || submitted) && assembly_point2.errors?.required">
+                        Assembly Point 2 is required
+                    </span>
+                </div>
+                <div class="col-md-4">
+                    <label for="assembly_point2_mobile">Mobile No</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="assembly_point2_mobile"
+                        placeholder="Mobile No"
+                        formControlName="assembly_point2_mobile" pattern="^[56789]\d{9,9}$" />
+                        <span class="text-danger"
+                        *ngIf="(assembly_point2_mobile.touched || submitted) && assembly_point2_mobile.errors?.required">
+                        Assembly Point 2 Mobile No is required
+                    </span>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-4">
+                    <label for="assembly_point2">Assembly Point 3</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="assembly_point3"
+                        placeholder="Assembly Point 3"
+                        formControlName="assembly_point3"/>
+                        <span class="text-danger"
+                        *ngIf="(assembly_point3.touched || submitted) && assembly_point3.errors?.required">
+                        Assembly Point 3 is required
+                    </span>
+                </div>
+                <div class="col-md-4">
+                    <label for="assembly_point3_mobile">Mobile No</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="assembly_point3_mobile"
+                        placeholder="Mobile No"
+                        formControlName="assembly_point3_mobile" pattern="^[56789]\d{9,9}$" />
+                        <span class="text-danger"
+                        *ngIf="(assembly_point3_mobile.touched || submitted) && assembly_point3_mobile.errors?.required">
+                        Assembly Point 3 Mobile No is required
+                    </span>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-md-4">
+                    <label for="fire_fighter">Fire Fighter</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="fire_fighter"
+                        placeholder="Fire Fighter"
+                        formControlName="fire_fighter"/>
+                        <span class="text-danger"
+                        *ngIf="(fire_fighter.touched || submitted) && fire_fighter.errors?.required">
+                        Fire Fighter is required
+                    </span>
+                </div>
+                <div class="col-md-4">
+                    <label for="fire_fighter_mobile">Mobile No</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="fire_fighter_mobile"
+                        placeholder="Fire Fighter Mobile"
+                        formControlName="fire_fighter_mobile" pattern="^[56789]\d{9,9}$" />
+                        <span class="text-danger"
+                        *ngIf="(fire_fighter_mobile.touched || submitted) && fire_fighter_mobile.errors?.required">
+                        Fire Fighter Mobile No is required
+                    </span>
+                </div>
+           </div>
+            <div class="row mb-2">
+                <div class="col-md-4">
+                    <label for="first_aider">First Aider</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="first_aider"
+                        placeholder="First Aider"
+                        formControlName="first_aider"/>
+                        <span class="text-danger"
+                        *ngIf="(first_aider.touched || submitted) && first_aider.errors?.required">
+                        First Aider is required
+                    </span>
+                </div>
+                <div class="col-md-4">
+                    <label for="first_aider_mobile">Mobile No</label>
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="first_aider_mobile"
+                        placeholder="First Aider Mobile"
+                        formControlName="first_aider_mobile" pattern="^[56789]\d{9,9}$" />
+                        <span class="text-danger"
+                        *ngIf="(first_aider_mobile.touched || submitted) && first_aider_mobile.errors?.required">
+                        Fire Fighter Mobile No is required
+                        </span>
+                </div>
+            </div>
+          </div>
+          <!-- /.box-body -->
+          <div class="box-footer">
+            <div class="form-group">
+                <div class="col-xs-offset-8 col-sm-4">
+                    <button type="submit" class="btn btn-primary btn-md mr-1" [disabled]="!emControllerForm.valid">
+                        <span class="fa fa-save" aria-hidden="true"></span> Save
+                    </button>
+                    <button type="reset" class="btn btn-warning btn-md">
+                        <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span> Reset
+                    </button>
+                </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="box box-info">
+        <div class="box-header with-border">
+          <h3 class="box-title">Emergency Controller List</h3>
+
+        </div>
+        <div class="box-body">
+            <div class="table">
+                <table class="table table-striped table-responsive table-condensed table-sm">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="text-left">Controller</th>
+                      <th scope="col" class="text-left">Mobile</th>
+                      <th scope="col" class="text-center">Shift</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let data of emData; let i = index">
+                      <tr>
+                        <td>{{ data.em_controller }}</td>
+                        <td>{{ data.em_mobile_no }}</td>
+                        <td>{{ data.shift }}</td>
+                        <td class="text-center">
+                          <div>
+                            <button
+                              type="button"
+                              class="btn btn-default btn-xs mr-1 btn-warning"
+                              (click)="editData(data)">
+                              <i class="fa fa-edit text-warning"></i>
+                            </button>
+                            <button
+                              type="button" 
+                              class="btn btn-default btn-xs mr-1 btn-danger"
+                             (click)="deleteData(data)">
+                              <i class="fa fa-trash" aria-hidden="true"></i>
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+                <!-- <pagination-controls (pageChange)="p = $event"></pagination-controls> -->
+              </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
